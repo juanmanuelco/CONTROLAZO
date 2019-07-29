@@ -1,0 +1,149 @@
+.centrado{
+    text-align: center;
+}
+.blanco{
+    color: white;
+}
+.hover{
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.hover-success:hover{
+    background-color: #83e49a;
+    transition: 0.3s;
+}
+
+.hover-primary:hover{
+    background-color: #78b0eb;
+    transition: 0.3s;
+}
+#row_meses{
+    visibility: hidden
+}
+
+.margin-12{
+    margin:12px;
+}
+
+@font-face {
+    font-family: 'Material Icons';
+    font-style: normal;
+    font-weight: 400;
+    src: url('/assets/material-design/MaterialIcons-Regular.eot'); /* For IE6-8 */
+    src: local('Material Icons'),
+      local('MaterialIcons-Regular'),
+      url('/assets/material-design/MaterialIcons-Regular.woff2') format('woff2'),
+      url('/assets/material-design/MaterialIcons-Regular.woff') format('woff'),
+      url('/assets/material-design/MaterialIcons-Regular.ttf') format('truetype');
+  }
+
+.material-icons {
+    font-family: 'Material Icons';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px;  /* Preferred icon size */
+    display: inline-block;
+    line-height: 1;
+    text-transform: none;
+    letter-spacing: normal;
+    word-wrap: normal;
+    white-space: nowrap;
+    direction: ltr;
+
+    /* Support for all WebKit browsers. */
+    -webkit-font-smoothing: antialiased;
+    /* Support for Safari and Chrome. */
+    text-rendering: optimizeLegibility;
+
+    /* Support for Firefox. */
+    -moz-osx-font-smoothing: grayscale;
+
+    /* Support for IE. */
+    font-feature-settings: 'liga';
+}
+
+  .fondo-aportante{
+    background-color: #78b0eb;
+  }
+  .fondo-socio{
+    background-color: darkkhaki;
+  }
+
+.modal-content {
+
+    margin: auto;
+    padding: 20px;
+    border: 1px solid black;
+
+}
+
+.mensaje-error-sistema{
+     
+    background-color:rgba(180, 000, 000, 0.9);
+    padding-top: 6px;
+    padding-bottom: 6px;
+    margin-bottom: 12px;
+}
+
+.mensaje-bien-sistema{
+    
+    background-color:rgba(39, 91, 233, 0.952);
+    padding-top:6px; 
+    padding-bottom:6px; 
+    margin-bottom: 12px;
+}
+
+
+.animated {
+    -webkit-animation-duration: 2s;
+    animation-duration: 2s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+   }
+   @-webkit-keyframes flash {
+    0%, 50%, 100% {
+    opacity: 1;
+    }
+   25%, 75% {
+    opacity: 0;
+    }
+   }
+   @keyframes flash {
+    0%, 50%, 100% {
+    opacity: 1;
+    }
+   25%, 75% {
+    opacity: 0;
+    }
+   }
+   .flash {
+    -webkit-animation-name: flash;
+    animation-name: flash;
+   }
+   .error-template {
+    padding: 40px 15px;
+    text-align: center;
+}
+
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 60px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0,0,0,0.3); /* Black w/ opacity */
+}
+
+.contenedor-bordes-m{
+    
+    margin-top:2%;
+    border:solid 1px;
+    border-color:white; 
+    padding:3%;
+
+}
