@@ -75,7 +75,7 @@ function handleFile(e) {
 
 
 function cargarNuevos(){
-    barra.style.visibility = 'visible'
+    (document.getElementById('barra')).style.visibility = 'visible'
     tabla = document.getElementsByTagName('tbody')[0]
     filas = tabla.getElementsByTagName('tr')
     var elementos = new Array()
@@ -85,9 +85,9 @@ function cargarNuevos(){
         cedula = filas[i].getElementsByTagName('td')[3].innerHTML 
         elementos.push({nombre: nombre, proceso : proceso, cedula:cedula})       
     }
-    envio = {elementos : elementos}
-    ruta = '/aportantes/todos'
-    porcentaje.style.width = '10%'
+    envio = {elementos : elementos};
+    ruta = '/aportantes/todos';
+    (document.getElementById('porcentaje')).style.width = '10%'
     $.ajax({
 		method: "POST",
         url: ruta,
@@ -95,8 +95,8 @@ function cargarNuevos(){
 		headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
 		data : JSON.stringify(envio),
 	}).done((datos) => {
-        paso1.innerHTML = datos
-        porcentaje.style.width = '30%'
+        paso1.innerHTML = datos;
+        (document.getElementById('porcentaje')).style.width = '30%'
         cargarTodos()
 	}).fail((jqXHR, textStatus)=>{
 		console.log(jqXHR)
@@ -113,8 +113,8 @@ function cargarTodos(){
         elementos.push(cedula)       
     }
     envio = {cedulas : elementos}
-    ruta = '/aportantes/no_hoja'
-    porcentaje.style.width = '40%'
+    ruta = '/aportantes/no_hoja';
+    (document.getElementById('porcentaje')).style.width = '40%';
     $.ajax({
 		method: "POST",
         url: ruta,
@@ -136,8 +136,8 @@ function cargarTodos(){
                     </tr>`
         }
         tabla.innerHTML = tabla.innerHTML + cadena;
-        paso2.innerHTML = 'COMPLETADO'
-        porcentaje.style.width = '55%'
+        paso2.innerHTML = 'COMPLETADO';
+        (document.getElementById('porcentaje')).style.width = '55%'
         diferenciarCostos()
 	}).fail((jqXHR, textStatus)=>{
 		console.log(jqXHR)
@@ -153,8 +153,8 @@ function diferenciarCostos(){
         elementos.push(cedula)       
     }
     envio = {cedulas : elementos}
-    ruta = '/aportantes/diferenciacion'
-    porcentaje.style.width = '60%'
+    ruta = '/aportantes/diferenciacion';
+    (document.getElementById('porcentaje')).style.width = '60%' ;
     $.ajax({
 		method: "POST",
         url: ruta,
@@ -178,7 +178,7 @@ function diferenciarCostos(){
             conteo++
         }
 
-        porcentaje.style.width = '100%'
+        document.getElementById('porcentaje').style.width = '100%'
         paso3.innerHTML = 'COMPLETADO'
     }).fail((jqXHR, textStatus)=>{
 		console.log(jqXHR)
@@ -203,7 +203,7 @@ function guardarAportes(){
 
     ruta = '/aportantes/guardar'
     
-    porcentaje.style.width = '30%'
+    document.getElementById('porcentaje').style.width = '30%'
     $.ajax({
 		method: "POST",
         url: ruta,
@@ -211,7 +211,7 @@ function guardarAportes(){
 		headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
 		data : JSON.stringify(envio),
 	}).done((datos) => {
-        porcentaje.style.width = '100%'
+        document.getElementById('porcentaje').style.width = '100%'
         location.reload()
     }).fail((jqXHR, textStatus)=>{
 		console.log(jqXHR)
@@ -238,13 +238,13 @@ var tableToExcel = (function() {
         if (!table.nodeType) table = document.getElementById(table)
         var ctx = { worksheet: name || 'Worksheet', table: table.innerHTML }
         Array_archivos.push({ nombre : name, archivo: base64(format(template, ctx))})
-        porcentaje.style.width = conteo +'%'
+        document.getElementById('porcentaje').style.width = conteo +'%'
     }
 })()
 
 
 function descargarExcels(){
-    barra.style.visibility = 'visible'
+    (document.getElementById('barra')).style.visibility = 'visible'
     var favorite = [];
     $.each($("input[name='filas_aportantes']:checked"), function(){     
         cedulas = $(this).attr('id')
@@ -255,7 +255,7 @@ function descargarExcels(){
     mesYAno= mesYAno.split('/')
     envio = {cedulas : favorite , anual : mesYAno[2], mensual:mesYAno[3]}
     ruta = '/aportantes/detalles'
-    porcentaje.style.width = 10 +'%'
+    document.getElementById('porcentaje').style.width = 10 +'%'
     $.ajax({
 		method: "POST",
         url: ruta,
@@ -263,7 +263,7 @@ function descargarExcels(){
 		headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
 		data : JSON.stringify(envio),
 	}).done((datos) => {
-        porcentaje.style.width = 30 +'%'
+        document.getElementById('porcentaje').style.width = 30 +'%'
         var cadena= ``
         listados = new Array()
         for(var i=0 ; i < datos.length; i++){
@@ -303,7 +303,7 @@ function descargarExcels(){
             cadena+=`</table>`
         }
         document.getElementById('tablas_ocultas').innerHTML = cadena;
-        porcentaje.style.width = 50 +'%'
+        document.getElementById('porcentaje').style.width = 50 +'%'
 
         var conteo = 50
         var pasos = 30 / datos.length
@@ -328,14 +328,14 @@ function guardarZip(archivos){
     pasos = 15/ archivos.length
     archivos.forEach(elemento => {
         zip.file(elemento.nombre + '.xls', elemento.archivo, {base64: true});
-        porcentaje.style.width = conteo +'%'
+        document.getElementById('porcentaje').style.width = conteo +'%'
         conteo+= pasos;
     });
     zip.generateAsync({type:"blob"})
         .then(function(content) {
             // Force down of the Zip file
             saveAs(content, "seguimiento.zip");
-            porcentaje.style.width = 100 +'%'
+            document.getElementById('porcentaje').style.width = 100 +'%'
         });
 }
 
@@ -359,9 +359,17 @@ function buscador(elemento, tabla) {
 
 
 function cambiarTipo(id){
-    var eleccion= document.getElementById('sel_soc_apor').value;
+    var socio = `op_soc_${id}`
+    socio = document.getElementById(socio).selected
+
+    var apore = `op_apo_${id}`
+    apore = document.getElementById(apore).selected
+
+    eleccion = socio ? 'SOCIO' : 'APORTANTE'
+
     ruta = '/cambio_tipo'
     envio = {id:id, tipo: eleccion}
+    
     $.ajax({
 		method: "POST",
         url: ruta,
