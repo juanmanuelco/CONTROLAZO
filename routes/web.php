@@ -34,3 +34,5 @@ Route::post('/aportante/actualizar', 'AportantesController@actualizar')->name('a
 Route::post('/eliminar_aportante',  'AportantesController@eliminar_aportante')->name('eliminar_aportante');
 
 Route::post('/anadir/aportante', 'AportantesController@anadir')->name('anadir');
+
+Route::post('/eliminar-registro-mensual', 'AportantesController@eliminarRegMen')->name('eliminarRegMen');

@@ -439,3 +439,20 @@ function eliminarReg(codigo, ruta){
 		} 
 	})  
 }
+
+
+function eliminarRegistro(){
+    var link = location.pathname;
+    link = link.split('/')
+    envio = {anual : link[2], mensual: link[3]}
+    ruta = '/eliminar-registro-mensual'
+    $.ajax({
+        method: "POST",
+        url: ruta,
+        headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+        data: envio
+    }).done((datos) => {
+        document.getElementsByTagName('body')[0].innerHTML = 'Recargando...'
+        location.reload();
+    })
+}

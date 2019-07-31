@@ -158,5 +158,13 @@ class AportantesController extends Controller
         }
         return redirect(route('listado_aportantes'))->with('error', "Ya xiste un aportante con esta cédula");
     }
+
+    public function eliminarRegMen(Request $datos){
+        DB::table('tabla_mes_aportacion')
+        ->where('anual', $datos->anual)
+        ->where('mensual', $datos->mensual)
+        ->delete();
+        return 'OK';
+    }
 }
 

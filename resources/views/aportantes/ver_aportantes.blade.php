@@ -6,6 +6,9 @@
     <div class="col-lg-4">
         <h2>Registro de {{$mes}} del {{$ano}}</h2>
     </div>
+    <div class="col-4">
+        <button class="btn btn-danger" onclick="eliminarRegistro();">Eliminar registro de este mes</button>
+    </div>
 </div>
 <div class="progress" id="barra" style="visibility:hidden; margin-top:12px">
     <div class="progress-bar progress-bar-striped progress-bar-animated" id="porcentaje" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: 0%"></div>
