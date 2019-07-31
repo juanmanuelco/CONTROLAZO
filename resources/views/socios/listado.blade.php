@@ -56,11 +56,11 @@
                             <td>
                                 <select name="" id="sel_soc_apor" onchange="cambiarTipo({{$socio->id}})">
                                     @if ($socio->tipo == 'SOCIO')
-                                        <option value="APORTANTE">APORTANTE</option>
-                                        <option value="SOCIO" selected>SOCIO</option>
+                                        <option value="SOCIO" id="op_soc_{{$socio->id}}">SOCIO</option>
+                                        <option value="APORTANTE" id="op_apo_{{$socio->id}}">APORTANTE</option>                             
                                     @else
-                                    <option value="APORTANTE" selected>APORTANTE</option>
-                                    <option value="SOCIO" >SOCIO</option>
+                                        <option value="APORTANTE" id="op_apo_{{$socio->id}}" >APORTANTE</option>
+                                        <option value="SOCIO" id="op_soc_{{$socio->id}}" >SOCIO</option>
                                     @endif
                                     
                                 </select>
