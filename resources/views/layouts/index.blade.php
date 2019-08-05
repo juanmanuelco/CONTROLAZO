@@ -15,7 +15,8 @@
                 <ul class="nav navbar-nav">
                     <li class="nav-item" role="presentation"><a class="nav-link" href="/">Empleados</a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link" href="{{route('listado_aportantes')}}">Socios</a></li>
-                    <li class="nav-item" role="presentation"></li>
+                    <li class="nav-item" role="presentation"><a  class="nav-link disabled" href="{{route('sala_reservacion')}}">Salas de eventos</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link disabled" href="{{route('reservaciones')}}">Reservaciones</a></li>
                 </ul>
             </div>
         </div>

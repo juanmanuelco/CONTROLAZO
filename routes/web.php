@@ -36,3 +36,18 @@ Route::post('/eliminar_aportante',  'AportantesController@eliminar_aportante')->
 Route::post('/anadir/aportante', 'AportantesController@anadir')->name('anadir');
 
 Route::post('/eliminar-registro-mensual', 'AportantesController@eliminarRegMen')->name('eliminarRegMen');
+
+Route::get('/sala_reservacion', 'ReservaController@sala_reservacion')->name('sala_reservacion');
+
+Route::post('/anadir_sala', 'ReservaController@anadir_sala')->name('anadir_sala');
+
+
+Route::get('/detalle_sala/{codigo}', 'ReservaController@detalle_sala')->name('detalle_sala');
+Route::post('/editar_sala', 'ReservaController@editar_sala')->name('editar_sala');
+
+Route::post('/eliminar_sala', 'ReservaController@eliminar_sala')->name('eliminar_sala');
+
+Route::get('/reservaciones', 'ReservaController@reservaciones')->name('reservaciones');
+
+
+Route::post('/guardar_reserva', 'ReservaController@guardar_reserva')->name('guardar_reserva');

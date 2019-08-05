@@ -279,19 +279,23 @@ function descargarExcels(){
                         var suma_val=0;
                         var suma_aporte=0;
                         var suma_ahorro =0;
+                        var tip_apor= false;
+                        if(datos[i].aportante.tipo == 'SOCIO'){
+                            tip_apor = true;
+                        }
                         for(var j=0; j < datos[i].aportaciones.length; j++){
                             apor= datos[i].aportaciones[j]
                             cadena+=`<tr>
                                         <td>${apor.anual}</td>
                                         <td>${meses[apor.mensual-1]}</td>
                                         <td>${apor.valor}</td>
-                                        <td>${apor.aporte}</td>
-                                        <td>${apor.ahorro}</td>
+                                        <td>${ tip_apor? apor.aporte : apor.valor}</td>
+                                        <td>${ tip_apor? apor.ahorro: 0.00}</td>
                                         <td>${apor.estado}</td>
                                     </tr>`
                             suma_val+= Number(apor.valor)
-                            suma_aporte+=Number(apor.aporte)
-                            suma_ahorro+= Number(apor.ahorro)
+                            suma_aporte+=tip_apor? Number(apor.aporte) : Number(apor.valor)
+                            suma_ahorro+= tip_apor? Number(apor.ahorro) : 0
                         }
                         cadena+=`<tr>
                                     <td colspan="2" style="text-align:right"><b>Totales</b></td>
@@ -396,14 +400,22 @@ function mostrarDatosModal(elemento, identidad, datos){
 		document.getElementById(elemento).reset()
 	} catch (error) {
 		
-	}
+    }
 	
 	switch(identidad) { 
 		case 'aportante':
             datos = datos.datos
-            txt_nom_apor.value= datos.nombre
-            txt_ced_apor.value = datos.cedula
-            txt_sue_apor.value = datos.sueldo
+            document.getElementById('txt_nom_apor').value= datos.nombre
+            document.getElementById('txt_ced_apor').value = datos.cedula
+            document.getElementById('txt_sue_apor').value = datos.sueldo
+            break;
+        case 'sala':
+            datos = datos.datos
+            document.getElementById('txt_nombre_sala').value= datos.nombre
+            document.getElementById('txt_descripcion_sala').value= datos.descripcion
+            document.getElementById('txt_precio_sala').value= Number(datos.precio).toFixed(2)
+            document.getElementById('txt_capacidad_sala').value= datos.capacidad
+            document.getElementById('txt_id').value = datos.id
             break;
         default:
             break;
@@ -422,9 +434,9 @@ function abrirModal(modal){
 	}
 }
 
-function eliminarReg(codigo, ruta){
+function eliminarReg(codigo, ruta, elemento){
 	swal({
-		title: 'Atención',   text: `¿ Desea eliminar al aportante ?`,
+		title: 'Atención',   text: `¿ Desea eliminar a ${elemento} ?`,
 		icon: "warning",     buttons: ['Cancelar', 'Aceptar'], 	dangerMode: true,
 	}).then((willDelete) => {
 		if (willDelete) {
@@ -437,7 +449,7 @@ function eliminarReg(codigo, ruta){
 				data: envio
 			}).done((datos) => {
 
-				swal(`El aportante ha sido eliminado`).then((value) => {
+				swal(`${elemento} ha sido eliminado/a`).then((value) => {
 					document.getElementsByTagName('body')[0].innerHTML= 'Recargando...'
 					location.reload() 
 				});
@@ -466,4 +478,24 @@ function eliminarRegistro(){
         document.getElementsByTagName('body')[0].innerHTML = 'Recargando...'
         location.reload();
     })
+}
+
+var continuacion = false
+
+function revisarReserva(e){
+    if(continuacion == false){
+        e.preventDefault();
+        var cadena_inicial = document.getElementById('fecha_ini').value +' ' + document.getElementById('hora_ini').value
+        cadena_inicial = new Date(cadena_inicial)
+
+        var cadena_final = document.getElementById('fecha_fin').value +' ' + document.getElementById('hora_fin').value
+        cadena_final = new Date(cadena_final)
+
+        if(cadena_inicial.getTime() >= cadena_final.getTime() ){
+            alert('La fecha y hora final debe ser superior a la inicial')
+        }else{
+            continuacion = true;
+            document.getElementById('form_save_reser').submit();
+        }        
+    } 
 }

@@ -30,8 +30,8 @@
                     <td></td><td>A</td><td>B</td><td>C</td><td>D</td><td>E</td><td>F</td><td>G</td><td>F</td>
                 </tr>
                 @foreach ($mensuales as $mensual)
-                    @if ($mensual->ahorro >0)
-                        <tr class="fondo-socio">
+                    @if ($mensual->tipo == 'SOCIO')
+                        <tr class="fondo-socio"> 
                     @else
                         <tr class="fondo-aportante">
                     @endif
@@ -41,8 +41,14 @@
                         <td>{{$mensual->proceso}}</td>
                         <td>{{$mensual->cedula}}</td>
                         <td class="td_valor" style="text-align:right">{{$mensual->valor}}</td>
-                        <td class="td_aporte" style="text-align:right">{{$mensual->aporte}}</td>
-                        <td class="td_ahorro" style="text-align:right">{{$mensual->ahorro}}</td>
+                        @if ($mensual->tipo == 'SOCIO')
+                            <td class="td_aporte" style="text-align:right">{{$mensual->aporte}}</td>
+                            <td class="td_ahorro" style="text-align:right">{{$mensual->ahorro}}</td>
+                        @else
+                            <td class="td_aporte" style="text-align:right">{{$mensual->valor}}</td>
+                            <td class="td_ahorro" style="text-align:right">0.00</td>
+                        @endif
+                        
                         <td>{{$mensual->estado}}</td>
                     </tr>
                 @endforeach

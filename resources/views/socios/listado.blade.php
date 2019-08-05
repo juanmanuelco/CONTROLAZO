@@ -45,7 +45,7 @@
                                     onclick="eliminarReg(
                                         '{{$socio->id}}', 
                                         '{{route('eliminar_aportante')}}',
-                                        'local'
+                                        'Aportante'
                                     )">
                                     <i class="zmdi zmdi-delete"></i>
                                 </button>
