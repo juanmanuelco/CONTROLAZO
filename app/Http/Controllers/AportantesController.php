@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Collection;
+use Illuminate\Support\Collection; 
 class AportantesController extends Controller
 {
     const meses = [
@@ -23,8 +23,8 @@ class AportantesController extends Controller
         $key = array_search($mes, array_column(self::meses, 'codigo'));
         $ano_actual = date("Y");
         $continua = false;
-        if(is_numeric($ano) && $ano <= $ano_actual &&  $ano>= 2000) $continua = true;                     
-        if($key != false && $continua){
+        if(is_numeric($ano) && $ano <= $ano_actual &&  $ano>= 2000) $continua = true;     
+        if(($key != false || $key==0) && $continua){
             $mes_detalle = self::meses[$key];
             $regitro = DB::table('tabla_mes_aportacion')->where('anual', $ano)->where('mensual', $mes)->get()->first();
             $abecedario = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","U","V","W","X","Y","Z"];

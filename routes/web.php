@@ -12,7 +12,7 @@
 */
 
 Route::get('/','AportantesController@index')->name('index');
-Route::get('/reporte/{ano}/{mes}','AportantesController@cargarAportes')->name('cargarAportes');
+Route::get('/reporte/{ano}/{mes}','AportantesController@cargarAportes')->name('cargarAportes'); 
 Route::get('/reporte/{ano}/{mes}','AportantesController@reportes_viejos')->name('reportes_viejos');
 
 Route::post('/aportantes/todos', 'AportantesController@todos_aportantes')->name('todos_aportantes');
