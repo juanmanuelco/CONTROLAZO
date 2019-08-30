@@ -86,6 +86,7 @@ function cargarNuevos(){
         elementos.push({nombre: nombre, proceso : proceso, cedula:cedula})       
     }
     envio = {elementos : elementos};
+    console.log(envio)
     ruta = '/aportantes/todos';
     (document.getElementById('porcentaje')).style.width = '10%'
     $.ajax({
@@ -166,6 +167,7 @@ function diferenciarCostos(){
         for(var i=0; i < datos.length; i++){
             var valor = filas[conteo].getElementsByTagName('td')[4].innerHTML           
             filas[conteo].getElementsByTagName('td')[6].innerHTML = 0
+            valor= Number(valor)
             if(datos[i].tipo == 'APORTANTE'){
                 filas[conteo].classList.add('fondo-aportante')
                 filas[conteo].getElementsByTagName('td')[5].innerHTML = valor
