@@ -149,9 +149,12 @@ function cargarTodos(){
 function diferenciarCostos(){
     filas = document.getElementsByTagName('tr')
     var elementos = new Array()
+    let elem_subida = new Array();
     for (var i = 4; i < filas.length; i++) {
         cedula = filas[i].getElementsByTagName('td')[3].innerHTML 
+        m_valor = filas[i].getElementsByTagName('td')[4].innerHTML 
         elementos.push(cedula)       
+        elem_subida.push({cedula: cedula, valor : m_valor})
     }
     envio = {cedulas : elementos}
     ruta = '/aportantes/diferenciacion';
@@ -165,9 +168,20 @@ function diferenciarCostos(){
 	}).done((datos) => {
         conteo=4
         for(var i=0; i < datos.length; i++){
-            var valor = filas[conteo].getElementsByTagName('td')[4].innerHTML           
+            
+            filas[conteo].getElementsByTagName('td')[1].innerHTML = datos[i].nombre
+            filas[conteo].getElementsByTagName('td')[2].innerHTML = datos[i].proceso
+            filas[conteo].getElementsByTagName('td')[3].innerHTML = datos[i].cedula
+
+            var found = elem_subida.filter(function(item) { return item.cedula == datos[i].cedula; });
+
+            filas[conteo].getElementsByTagName('td')[4].innerHTML = found[0].valor
+            
+
+            var valor = filas[conteo].getElementsByTagName('td')[4].innerHTML          
             filas[conteo].getElementsByTagName('td')[6].innerHTML = 0
             valor= Number(valor)
+            
             if(datos[i].tipo == 'APORTANTE'){
                 filas[conteo].classList.add('fondo-aportante')
                 filas[conteo].getElementsByTagName('td')[5].innerHTML = valor
@@ -179,7 +193,7 @@ function diferenciarCostos(){
             }
             conteo++
         }
-
+ 
         document.getElementById('porcentaje').style.width = '100%'
         paso3.innerHTML = 'COMPLETADO'
     }).fail((jqXHR, textStatus)=>{
