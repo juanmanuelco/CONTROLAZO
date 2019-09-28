@@ -1,4 +1,4 @@
-
+/*meses*/
 
 let anual = 2000;
 let mensual = 1;
